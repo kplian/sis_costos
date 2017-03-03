@@ -41,7 +41,7 @@ header("content-type: text/javascript; charset=UTF-8");
                 type: 'Field',
                 form: true
             },
-
+            //asd
             {
                 config: {
                     sysorigen: 'sis_contabilidad',
