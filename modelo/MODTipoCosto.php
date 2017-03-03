@@ -16,7 +16,7 @@ class MODTipoCosto extends MODbase{
 	function listarTipoCosto(){
 		//Definicion de variables para ejecucion del procedimientp
 		$this->procedimiento='cos.ft_tipo_costo_sel';
-		$this->transaccion='COS_TCO_SEL';
+		$this->transaccion='COS_TC_SEL';
 		$this->tipo_procedimiento='SEL';//tipo de transaccion
 				
 		//Definicion de la lista del resultado del query
@@ -49,7 +49,7 @@ function listarTipoCostoArb(){
 		    //Definicion de variables para ejecucion del procedimientp
 		    $this->procedimiento='cos.ft_tipo_costo_sel';
 		    $this-> setCount(false);
-		    $this->transaccion='COS_TICOSARB_SEL';
+		    $this->transaccion='COS_TICOSAR_SEL';
 		    $this->tipo_procedimiento='SEL';//tipo de transaccion
 		    
 		    $id_padre = $this->objParam->getParametro('id_padre');
@@ -87,7 +87,7 @@ function listarTipoCostoArb(){
 	function insertarTipoCosto(){
 		//Definicion de variables para ejecucion del procedimiento
 		$this->procedimiento='cos.ft_tipo_costo_ime';
-		$this->transaccion='COS_TCO_INS';
+		$this->transaccion='COS_TC_INS';
 		$this->tipo_procedimiento='IME';
 				
 		//Define los parametros para la funcion
@@ -109,7 +109,7 @@ function listarTipoCostoArb(){
 	function modificarTipoCosto(){
 		//Definicion de variables para ejecucion del procedimiento
 		$this->procedimiento='cos.ft_tipo_costo_ime';
-		$this->transaccion='COS_TCO_MOD';
+		$this->transaccion='COS_TC_MOD';
 		$this->tipo_procedimiento='IME';
 				
 		//Define los parametros para la funcion
@@ -132,7 +132,7 @@ function listarTipoCostoArb(){
 	function eliminarTipoCosto(){
 		//Definicion de variables para ejecucion del procedimiento
 		$this->procedimiento='cos.ft_tipo_costo_ime';
-		$this->transaccion='COS_TCO_ELI';
+		$this->transaccion='COS_TC_ELI';
 		$this->tipo_procedimiento='IME';
 				
 		//Define los parametros para la funcion
