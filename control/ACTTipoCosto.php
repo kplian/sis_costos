@@ -10,7 +10,7 @@
 class ACTTipoCosto extends ACTbase{    
 			
 	function listarTipoCosto(){
-		$this->objParam->defecto('ordenacion','id_tipo_costo');
+		$this->objParam->defecto('ordenacion','id_tipo_costo_fk');
 
 		$this->objParam->defecto('dir_ordenacion','asc');
 		if($this->objParam->getParametro('tipoReporte')=='excel_grid' || $this->objParam->getParametro('tipoReporte')=='pdf_grid'){
@@ -25,12 +25,19 @@ class ACTTipoCosto extends ACTbase{
 	}
 	
 	function listarTipoCostoArb(){
+        $this->objParam->defecto('ordenacion','codigo');
+        $this->objParam->defecto('dir_ordenacion','asc');
+        if($this->objParam->getParametro('codigo') != '') {
+            $this->objParam->addFiltro(" tco.codigo = " . $this->objParam->getParametro('codigo'));
+        }
         
         //obtiene el parametro nodo enviado por la vista
         $node=$this->objParam->getParametro('node');
 
         $id_tipo_costo=$this->objParam->getParametro('id_tipo_costo');
         $tipo_nodo=$this->objParam->getParametro('tipo_nodo');
+		
+		
         
                    
         if($node=='id'){

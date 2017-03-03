@@ -39,7 +39,7 @@ class MODTipoCosto extends MODbase{
 		//Ejecuta la instruccion
 		$this->armarConsulta();
 		$this->ejecutarConsulta();
-		
+       // var_dump($this->respuesta); exit;
 		//Devuelve la respuesta
 		return $this->respuesta;
 	}
@@ -54,9 +54,9 @@ function listarTipoCostoArb(){
 		    
 		    $id_padre = $this->objParam->getParametro('id_padre');
 		    
-		    $this->setParametro('id_padre','id_padre','varchar'); 
-			
-			$this->captura('id_tipo_costo','int4');
+		    $this->setParametro('id_padre','id_padre','varchar');
+		    $this->setParametro('id_gestion','id_gestion','int4');
+            $this->captura('id_tipo_costo','int4');
 			$this->captura('codigo','varchar');
 			$this->captura('nombre','varchar');
 			$this->captura('sw_trans','varchar');
@@ -72,15 +72,14 @@ function listarTipoCostoArb(){
 			$this->captura('usr_reg','varchar');
 			$this->captura('usr_mod','varchar');
 			$this->captura('tipo_nodo','varchar');
-				
-			     
-		            
-		    
-			 
+            $this->captura('id_gestion','int4');
+           
+
 		     //Ejecuta la instruccion
 		     $this->armarConsulta();
 			 $this->ejecutarConsulta();
-		    
+
+
 		    return $this->respuesta;       
     }
 			
@@ -96,7 +95,7 @@ function listarTipoCostoArb(){
 		$this->setParametro('nombre','nombre','varchar');
 		$this->setParametro('sw_trans','sw_trans','varchar');
 		$this->setParametro('descripcion','descripcion','varchar');
-		$this->setParametro('id_tipo_costo_fk','id_tipo_costo_fk','int4');
+		$this->setParametro('id_tipo_costo_fk','id_tipo_costo_fk','varchar');
 		$this->setParametro('estado_reg','estado_reg','varchar');
 
 		//Ejecuta la instruccion
@@ -119,7 +118,7 @@ function listarTipoCostoArb(){
 		$this->setParametro('nombre','nombre','varchar');
 		$this->setParametro('sw_trans','sw_trans','varchar');
 		$this->setParametro('descripcion','descripcion','varchar');
-		$this->setParametro('id_tipo_costo_fk','id_tipo_costo_fk','int4');
+		$this->setParametro('id_tipo_costo_fk','id_tipo_costo_fk','varchar');
 		$this->setParametro('estado_reg','estado_reg','varchar');
 
 		//Ejecuta la instruccion
