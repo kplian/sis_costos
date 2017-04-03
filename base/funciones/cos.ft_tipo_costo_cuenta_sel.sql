@@ -38,13 +38,13 @@ BEGIN
     v_parametros = pxp.f_get_record(p_tabla);
 
 	/*********************************
- 	#TRANSACCION:  'COS_COC_SEL'
+ 	#TRANSACCION:  'COS_CO_SEL'
  	#DESCRIPCION:	Consulta de datos
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:17
 	***********************************/
 
-	if(p_transaccion='COS_COC_SEL')then
+	if(p_transaccion='COS_CO_SEL')then
 
     	begin
     		--Sentencia de la consulta
@@ -53,7 +53,8 @@ BEGIN
                             coc.estado_reg,
                             coc.codigo_cuenta,
                             array_to_string( coc.id_auxiliares,'','',''null'')::varchar,
-            				(select list(a.nombre_auxiliar) from conta.tauxiliar a where a.id_auxiliar =ANY(coc.id_auxiliares))::varchar as auxiliares,
+            				(select list(a.codigo_auxiliar) from conta.tauxiliar a where a.id_auxiliar =ANY(coc.id_auxiliares))::varchar as codigo_auxiliares,
+                            (select list(a.nombre_auxiliar) from conta.tauxiliar a where a.id_auxiliar =ANY(coc.id_auxiliares))::varchar as auxiliares,
             				coc.id_usuario_reg,
                             coc.fecha_reg,
                             coc.id_usuario_ai,
@@ -62,15 +63,29 @@ BEGIN
                             coc.fecha_mod,
                             usu1.cuenta as usr_reg,
                             usu2.cuenta as usr_mod,
-                            coc.id_tipo_costo
+                            coc.id_tipo_costo,
+                             c.nombre_cuenta
             			from cos.ttipo_costo_cuenta coc
                         inner join segu.tusuario usu1 on usu1.id_usuario = coc.id_usuario_reg
                         left join segu.tusuario usu2 on usu2.id_usuario = coc.id_usuario_mod
+                        inner join conta.tcuenta c on c.nro_cuenta = coc.codigo_cuenta
 				        where  ';
 
 			--Definicion de la respuesta
 			v_consulta:=v_consulta||v_parametros.filtro;
-			v_consulta:=v_consulta||' order by ' ||v_parametros.ordenacion|| ' ' || v_parametros.dir_ordenacion || ' limit ' || v_parametros.cantidad || ' offset ' || v_parametros.puntero;
+			v_consulta:=v_consulta||' GROUP BY coc.id_tipo_costo_cuenta,
+                          		coc.estado_reg,
+                            	coc.codigo_cuenta,
+                         	 	coc.id_usuario_reg,
+                            	coc.fecha_reg,
+                            	coc.id_usuario_ai,
+                            	coc.usuario_ai,
+                            	coc.id_usuario_mod,
+                            	coc.fecha_mod,
+                            	usu1.cuenta,
+                            	usu2.cuenta,
+                            	coc.id_tipo_costo,
+                                 c.nombre_cuenta order by ' ||v_parametros.ordenacion|| ' ' || v_parametros.dir_ordenacion || ' limit ' || v_parametros.cantidad || ' offset ' || v_parametros.puntero;
 
 			--Devuelve la respuesta
 			return v_consulta;
@@ -78,13 +93,13 @@ BEGIN
 		end;
 
 	/*********************************
- 	#TRANSACCION:  'COS_COC_CONT'
+ 	#TRANSACCION:  'COS_CO_CONT'
  	#DESCRIPCION:	Conteo de registros
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:17
 	***********************************/
 
-	elsif(p_transaccion='COS_COC_CONT')then
+	elsif(p_transaccion='COS_CO_CONT')then
 
 		begin
 			--Sentencia de la consulta de conteo de registros
@@ -92,6 +107,7 @@ BEGIN
 					    from cos.ttipo_costo_cuenta coc
 					    inner join segu.tusuario usu1 on usu1.id_usuario = coc.id_usuario_reg
 						left join segu.tusuario usu2 on usu2.id_usuario = coc.id_usuario_mod
+                        inner join conta.tcuenta c on c.nro_cuenta = coc.codigo_cuenta
 					    where ';
 
 			--Definicion de la respuesta
@@ -103,12 +119,12 @@ BEGIN
 		end;
 
 /*********************************
- 	#TRANSACCION:  'COS_CUEN_SEL'
+ 	#TRANSACCION:  'COS_CUE_SEL'
  	#DESCRIPCION:	Listar de cuentas
  	#AUTOR:		MMV
  	#FECHA:		21-02-2017
 	***********************************/
-    ELSIF(p_transaccion='COS_CUEN_SEL')then
+    ELSIF(p_transaccion='COS_CUE_SEL')then
 
     	begin
     		--Sentencia de la consulta
@@ -155,13 +171,13 @@ BEGIN
 
 		end;
         /*********************************
- 	#TRANSACCION:  'COS_CUEN_CONT'
+ 	#TRANSACCION:  'COS_CUE_CONT'
  	#DESCRIPCION:	Conteo de registros
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:
 	***********************************/
 
-	elsif(p_transaccion='COS_CUEN_CONT')then
+	elsif(p_transaccion='COS_CUE_CONT')then
 
 		begin
 

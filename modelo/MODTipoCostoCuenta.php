@@ -24,6 +24,7 @@ class MODTipoCostoCuenta extends MODbase{
 		$this->captura('estado_reg','varchar');
 		$this->captura('codigo_cuenta','varchar');
 		$this->captura('id_auxiliares','varchar');
+		$this->captura('codigo_auxiliares','varchar');
 		$this->captura('auxiliares','varchar');
 		$this->captura('id_usuario_reg','int4');
 		$this->captura('fecha_reg','timestamp');
@@ -34,6 +35,7 @@ class MODTipoCostoCuenta extends MODbase{
 		$this->captura('usr_reg','varchar');
 		$this->captura('usr_mod','varchar');
 		$this->captura('id_tipo_costo','int4');
+        $this->captura('nombre_cuenta','varchar');
 		
 		
 		//Ejecuta la instruccion
