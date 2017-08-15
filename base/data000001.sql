@@ -8,3 +8,13 @@ select pxp.f_insert_tgui ('Configuración', 'Configuración', 'CONCOS', 'si', 1,
 select pxp.f_insert_tgui ('Clasificación de Costos', 'Tipos de Costos', 'TIPCOS', 'si', 1, 'sis_costos/vista/tipo_costo/TipoCosto.php', 3, '', 'TipoCosto', 'COS');
 
 /***********************************F-DAT-RAC-COSTOS-0-27/12/2016*****************************************/
+
+
+
+/***********************************I-DAT-RAC-COSTOS-0-27/08/2017*****************************************/
+
+select pxp.f_insert_tgui ('Matriz de Costos', 'Reporte Matriz de Costos', 'MATCOS', 'si', 2, 'sis_costos/vista/tipo_costo/FormFiltroBalanceCostos.php', 2, '', 'FormFiltroBalanceCostos', 'COS');
+select pxp.f_insert_testructura_gui ('MATCOS', 'COSTO');
+
+
+/***********************************F-DAT-RAC-COSTOS-0-27/08/2017*****************************************/
