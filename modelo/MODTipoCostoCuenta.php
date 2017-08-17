@@ -132,5 +132,35 @@ class MODTipoCostoCuenta extends MODbase{
 
     }
 
+     function listarConfigPendiente(){
+	    //Definicion de variables para ejecucion del procedimientp
+	    $this->procedimiento='cos.ft_tipo_costo_cuenta_sel';
+	    $this-> setCount(false);
+		//$this->setTipoRetorno('record');
+	    $this->transaccion='COS_CHKCONFIG_SEL';
+	    $this->tipo_procedimiento='SEL';//tipo de transaccion
+	    
+	    $this->setParametro('id_gestion','id_gestion','integer');
+		
+		$this->captura('id_auxiliar','int4'); 
+        $this->captura('id_cuenta','int4'); 
+        $this->captura('nro_cuenta','varchar'); 
+        $this->captura('nombre_cuenta','varchar'); 
+        $this->captura('codigo_auxiliar','varchar'); 
+        $this->captura('nombre_auxiliar','varchar'); 
+		$this->captura('rownum','varchar'); 
+		
+		
+		//Ejecuta la instruccion
+	    $this->armarConsulta();
+		//echo $this->getConsulta();
+		//exit;
+	    $this->ejecutarConsulta();
+	    
+	    return $this->respuesta; 
+		
+			
+     }
+
 }
 ?>

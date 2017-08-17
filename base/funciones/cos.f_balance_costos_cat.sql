@@ -191,7 +191,7 @@ BEGIN
        END IF; 
        
        
-       v_consulta = v_consulta|| ' order by  codigo_orden, id_categoria_programatica, id_cp_actividad';                  
+       v_consulta = v_consulta|| ' order by  nro_nodo, id_categoria_programatica, id_cp_actividad';                  
          
        
        raise notice 'notice.. %',v_consulta;

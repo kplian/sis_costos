@@ -37,13 +37,13 @@ BEGIN
     v_parametros = pxp.f_get_record(p_tabla);
 
 	/*********************************
- 	#TRANSACCION:  'COS_TCO_SEL'
+ 	#TRANSACCION:  'COS_TC_SEL'
  	#DESCRIPCION:	Consulta de datos
  	#AUTOR:		admin
  	#FECHA:		27-12-2016 20:53:14
 	***********************************/
 
-	if(p_transaccion='COS_TCO_SEL')then
+	if(p_transaccion='COS_TC_SEL')then
 
     	begin
     		--Sentencia de la consulta
@@ -78,13 +78,13 @@ BEGIN
 		end;
 
 	/*********************************
- 	#TRANSACCION:  'COS_TCO_CONT'
+ 	#TRANSACCION:  'COS_TC_CONT'
  	#DESCRIPCION:	Conteo de registros
  	#AUTOR:		admin
  	#FECHA:		27-12-2016 20:53:14
 	***********************************/
 
-	elsif(p_transaccion='COS_TCO_CONT')then
+	elsif(p_transaccion='COS_TC_CONT')then
 
 		begin
 			--Sentencia de la consulta de conteo de registros
@@ -103,13 +103,13 @@ BEGIN
 		end;
 
    /*********************************
-     #TRANSACCION:  'COS_TICOSARB_SEL'
+     #TRANSACCION:  'COS_TICOSAR_SEL'
      #DESCRIPCION:    consulta en formato arbol para tipos de costo
      #AUTOR:            Rensi Arteaga Copari
      #FECHA:            27-12-2016
     ***********************************/
 
-    elseif(p_transaccion='COS_TICOSARB_SEL')then
+    elseif(p_transaccion='COS_TICOSAR_SEL')then
 
         begin
               if(v_parametros.id_padre = '%') then

@@ -115,8 +115,9 @@ BEGIN
          
       FROM    temp_balance_costos  t
       inner join conta.tcuenta c on c.id_cuenta = t.id_cuenta
-      WHERE   c.id_cuenta  = p_id_cuenta
-             and  tipo = 'auxiliar' 
+      WHERE        c.id_cuenta  = p_id_cuenta  
+              and  tipo = 'auxiliar' 
+              and t.id_tipo_costo_fk = p_id_tipo_costo_fk
       group by
          t.id_tipo_costo_fk,
          c.id_cuenta,

@@ -162,7 +162,7 @@ BEGIN
        END IF; 
        
        
-       v_consulta = v_consulta|| ' order by  codigo_orden, periodo';                  
+       v_consulta = v_consulta|| ' order by  nro_nodo, periodo';                  
          
        
        raise notice 'notice.. %',v_consulta;

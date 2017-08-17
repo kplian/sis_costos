@@ -53,6 +53,24 @@ class ACTTipoCostoCuenta extends ACTbase{
         $this->res->imprimirRespuesta($this->res->generarJson());
     }
 
+    function listarConfigPendiente(){
+		$this->objParam->defecto('ordenacion','id_tipo_costo_cuenta');
+        $this->objParam->defecto('dir_ordenacion','asc');
+
+        if($this->objParam->getParametro('id_tipo_costo') != '') {
+            $this->objParam->addFiltro(" coc.id_tipo_costo = " . $this->objParam->getParametro('id_tipo_costo'));
+        }
+        if($this->objParam->getParametro('tipoReporte')=='excel_grid' || $this->objParam->getParametro('tipoReporte')=='pdf_grid'){
+			$this->objReporte = new Reporte($this->objParam,$this);
+			$this->res = $this->objReporte->generarReporteListado('MODTipoCostoCuenta','listarConfigPendiente');
+		} else{
+			$this->objFunc=$this->create('MODTipoCostoCuenta');
+			
+			$this->res=$this->objFunc->listarConfigPendiente($this->objParam);
+		}
+		$this->res->imprimirRespuesta($this->res->generarJson());
+	}
+
 			
 }
 

@@ -40,13 +40,13 @@ BEGIN
     v_parametros = pxp.f_get_record(p_tabla);
 
 	/*********************************
- 	#TRANSACCION:  'COS_COC_INS'
+ 	#TRANSACCION:  'COS_CO_INS'
  	#DESCRIPCION:	Insercion de registros
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:17
 	***********************************/
 
-	if(p_transaccion='COS_COC_INS')then
+	if(p_transaccion='COS_CO_INS')then
 
         begin
 
@@ -102,13 +102,13 @@ BEGIN
 		end;
 
 	/*********************************
- 	#TRANSACCION:  'COS_COC_MOD'
+ 	#TRANSACCION:  'COS_CO_MOD'
  	#DESCRIPCION:	Modificacion de registros
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:17
 	***********************************/
 
-	elsif(p_transaccion='COS_COC_MOD')then
+	elsif(p_transaccion='COS_CO_MOD')then
 
 		begin
 
@@ -134,13 +134,13 @@ BEGIN
 		end;
 
 	/*********************************
- 	#TRANSACCION:  'COS_COC_ELI'
+ 	#TRANSACCION:  'COS_CO_ELI'
  	#DESCRIPCION:	Eliminacion de registros
  	#AUTOR:		admin
  	#FECHA:		30-12-2016 20:29:17
 	***********************************/
 
-	elsif(p_transaccion='COS_COC_ELI')then
+	elsif(p_transaccion='COS_CO_ELI')then
 
 		begin
 			--Sentencia de la eliminacion
