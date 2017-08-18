@@ -335,8 +335,14 @@ header("content-type: text/javascript; charset=UTF-8");
             this.Cmp.id_tipo_costo.setValue(this.id_tipo_costo);
             Phx.vista.TipoCostoCuenta.superclass.loadValoresIniciales.call(this);
         },
-
-
+        
+        south : {
+			url : '../../../sis_costos/vista/tipo_costo_cuenta/AuxiliarConf.php',
+			title : 'Auxiliares',
+			height : '50%', //altura de la ventana hijo
+			cls : 'AuxiliarConf'
+		},
+		
         bdel: true,
         bsave: true
     })

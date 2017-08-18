@@ -161,6 +161,28 @@ class MODTipoCostoCuenta extends MODbase{
 		
 			
      }
+	 function listarAuxiliarConfigurado(){
+		//Definicion de variables para ejecucion del procedimientp
+		$this->procedimiento='cos.ft_tipo_costo_cuenta_sel';
+		$this->transaccion='COS_CONFAUX_SEL';
+		$this->tipo_procedimiento='SEL';//tipo de transaccion
+		
+		$this->setParametro('id_tipo_costo_cuenta','id_tipo_costo_cuenta','integer');
+				
+		//Definicion de la lista del resultado del query
+		$this->captura('id_auxiliar','int4');
+        $this->captura('codigo_auxiliar','varchar');
+        $this->captura('nombre_auxiliar','varchar');
+        $this->captura('id_tipo_costo_cuenta','int4');
+		
+		
+		//Ejecuta la instruccion
+		$this->armarConsulta();
+		$this->ejecutarConsulta();
+		//var_dump($this->respuesta); exit;
+		//Devuelve la respuesta
+		return $this->respuesta;
+	}
 
 }
 ?>

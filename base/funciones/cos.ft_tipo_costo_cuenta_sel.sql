@@ -33,6 +33,8 @@ DECLARE
     v_gestion			varchar;
     v_id_gestion		integer;
     v_add_filtro		varchar;
+    va_id_aux			integer[];
+    v_id_aux			varchar;
 			    
 BEGIN
 
@@ -264,6 +266,70 @@ if(p_transaccion='COS_CO_SEL')then
 			return v_consulta;
 						
 		end;
+        
+    /*********************************    
+ 	#TRANSACCION:  'COS_CONFAUX_SEL'
+ 	#DESCRIPCION:	listado  de auxiliares configurados por cuenta
+ 	#AUTOR:		admin	
+ 	#FECHA:		30-12-2016 20:29:17
+	***********************************/
+
+    ELSEIF(p_transaccion='COS_CONFAUX_SEL')then
+                    
+        begin
+        
+          
+        
+            select 
+               tct.id_auxiliares
+            into
+               va_id_aux
+            from cos.ttipo_costo_cuenta tct
+            where tct.id_tipo_costo_cuenta = v_parametros.id_tipo_costo_cuenta;
+            
+            v_id_aux = array_to_string(va_id_aux,',');
+        
+        
+            --Sentencia de la consulta
+            v_consulta:='SELECT
+                              aux.id_auxiliar,
+                              aux.codigo_auxiliar,
+                              aux.nombre_auxiliar,
+                              '||v_parametros.id_tipo_costo_cuenta||' as id_tipo_costo_cuenta
+                            from conta.tauxiliar aux
+                            where aux.id_auxiliar in ('||COALESCE(v_id_aux,'0')||')  AND ';
+            
+            --Definicion de la respuesta
+            v_consulta:=v_consulta||v_parametros.filtro;
+            v_consulta:=v_consulta||' order by ' ||v_parametros.ordenacion|| ' ' || v_parametros.dir_ordenacion || ' limit ' || v_parametros.cantidad || ' offset ' || v_parametros.puntero;
+
+            --Devuelve la respuesta
+            return v_consulta;
+                        
+        end;
+
+	/*********************************    
+ 	#TRANSACCION:  'COS_CONFAUX_CONT'
+ 	#DESCRIPCION:	Conteo de registros
+ 	#AUTOR:		admin	
+ 	#FECHA:		30-12-2016 20:29:17
+	***********************************/
+
+	elsif(p_transaccion='COS_CONFAUX_CONT')then
+
+		begin
+			--Sentencia de la consulta de conteo de registros
+			v_consulta:='select count(aux.id_auxiliar)
+					    from conta.tauxiliar aux
+                            where aux.id_auxiliar in ('||COALESCE(v_id_aux,'0')||')  AND ';
+			
+			--Definicion de la respuesta		    
+			v_consulta:=v_consulta||v_parametros.filtro;
+
+			--Devuelve la respuesta
+			return v_consulta;
+
+		end;    
     
     
 					
