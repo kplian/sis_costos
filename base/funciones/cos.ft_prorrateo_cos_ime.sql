@@ -55,7 +55,7 @@ BEGIN
 	if(p_transaccion='COS_PRO_COS_INS')then
 
         begin
-           		raise exception 'v_parametros %',v_parametros;
+           		
                 --Sentencia de la insercion
                 insert into cos.tprorrateo_cos(
                 codigo,

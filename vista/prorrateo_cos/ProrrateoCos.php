@@ -152,6 +152,7 @@ Phx.vista.ProrrateoCos=Ext.extend(Phx.gridInterfaz,{
 				fieldLabel : 'Gestión',
 				allowBlank : false,
 				forceSelection:false,
+				disabled:true,
 				editable: false,
 				width: 125,
 				listWidth:'232',
