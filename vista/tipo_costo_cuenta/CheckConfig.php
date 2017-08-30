@@ -6,11 +6,10 @@
  * @date 30-12-2016 20:29:17
  * @description Archivo con la interfaz de usuario que permite la ejecucion de todas las funcionalidades del sistema
  */
-
 header("content-type: text/javascript; charset=UTF-8");
 ?>
 <script>
-    Phx.vista.CheckConfig = Ext.extend(Phx.gridInterfaz, {
+Phx.vista.CheckConfig = Ext.extend(Phx.gridInterfaz, {
 
         constructor: function (config) {
             this.maestro = config.maestro;
@@ -116,7 +115,7 @@ header("content-type: text/javascript; charset=UTF-8");
 
         ],
         tam_pag: 10000,
-        title: 'Cuentas / Auxiliares',
+        title: 'Configuración',
         ActList: '../../sis_costos/control/TipoCostoCuenta/listarConfigPendiente',
         id_store: 'rownum',
         fields: [
