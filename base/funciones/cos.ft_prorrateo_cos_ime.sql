@@ -55,7 +55,7 @@ BEGIN
 	if(p_transaccion='COS_PRO_COS_INS')then
 
         begin
-           		
+
                 --Sentencia de la insercion
                 insert into cos.tprorrateo_cos(
                 codigo,

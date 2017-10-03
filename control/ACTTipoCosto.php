@@ -13,6 +13,12 @@ class ACTTipoCosto extends ACTbase{
 	function listarTipoCosto(){
 		$this->objParam->defecto('ordenacion','id_tipo_costo_fk');
 		$this->objParam->defecto('dir_ordenacion','asc');
+
+		//filtro de tipo de costos de solo movimiento
+		if ($this->objParam->getParametro('sw_trans') != '') {
+			$this->objParam->addFiltro("tco.sw_trans  = ''". $this->objParam->getParametro('sw_trans')."''");
+		}
+
 		if($this->objParam->getParametro('tipoReporte')=='excel_grid' || $this->objParam->getParametro('tipoReporte')=='pdf_grid'){
 			$this->objReporte = new Reporte($this->objParam,$this);
 			$this->res = $this->objReporte->generarReporteListado('MODTipoCosto','listarTipoCosto');
@@ -148,6 +154,7 @@ class ACTTipoCosto extends ACTbase{
 		
 		if($this->objParam->getParametro('tipo_reporte') == 'periodo') {
            $dataSource = $this->recuperarDatosBalanceCostos();
+           var_dump($dataSource);exit;
         }
 		else{
 			$dataSource = $this->recuperarDatosBalanceCostosCategoria();

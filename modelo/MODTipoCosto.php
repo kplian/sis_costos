@@ -37,6 +37,7 @@ class MODTipoCosto extends MODbase{
 		
 		//Ejecuta la instruccion
 		$this->armarConsulta();
+		//var_dump($this->consulta); exit;
 		$this->ejecutarConsulta();
        // var_dump($this->respuesta); exit;
 		//Devuelve la respuesta
@@ -227,10 +228,10 @@ function listarTipoCostoArb(){
 		
 		//Ejecuta la instruccion
 	    $this->armarConsulta();
-		//echo $this->getConsulta();
+		echo $this->getConsulta();
 		//exit;
 	    $this->ejecutarConsulta();
-	    
+	   //var_dump($this->respuesta);exit;
 	    return $this->respuesta; 
 		
 			

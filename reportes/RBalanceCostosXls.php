@@ -308,7 +308,6 @@ class RBalanceCostosXls
 		//coloca los montos
 		/////////////////////				
 		$col_ini_montos = 10;
-		
 		$columnaVal = $val["periodo"] + $col_ini_montos;
 		$monto_str =  $val['monto'];
 				
