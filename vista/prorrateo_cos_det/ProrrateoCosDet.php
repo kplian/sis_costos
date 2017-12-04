@@ -22,18 +22,27 @@ Phx.vista.ProrrateoCosDet=Ext.extend(Phx.gridInterfaz,{
 
 	iniciarEventos: function () {
 		this.Cmp.id_tipo_costo.on('select',function (cmb, record, index) {
-
 			this.Cmp.id_cuenta.reset();
 			this.Cmp.id_cuenta.modificado = true;
 			this.Cmp.id_cuenta.setDisabled(false);
 			this.Cmp.id_cuenta.store.baseParams = {par_filtro: 'c.nro_cuenta#c.nombre_cuenta', id_tipo_costo: this.Cmp.id_tipo_costo.getValue()};
 
+			/*this.Cmp.id_auxiliar.reset();
+			this.Cmp.id_auxiliar.modificado = true;
+			this.Cmp.id_auxiliar.setDisabled(false);
+			this.Cmp.id_auxiliar.store.baseParams = {par_filtro: 'aux.codigo_auxiliar#aux.nombre_auxiliar', id_tipo_costo: this.Cmp.id_tipo_costo.getValue()};*/
+			this.Cmp.id_auxiliar.reset();
+		},this);
+		
+		this.Cmp.id_cuenta.on('select', function (cmb, rec, index) {
+			console.log('cmb_id_cuenta :',cmb);
+			console.log('rec_id_cuenta :',rec.data.nro_cuenta);
+			console.log('this.Cmp.id_tipo_costo.getValue() :',this.Cmp.id_tipo_costo.getValue());
 			this.Cmp.id_auxiliar.reset();
 			this.Cmp.id_auxiliar.modificado = true;
 			this.Cmp.id_auxiliar.setDisabled(false);
-			this.Cmp.id_auxiliar.store.baseParams = {par_filtro: 'aux.codigo_auxiliar#aux.nombre_auxiliar', id_tipo_costo: this.Cmp.id_tipo_costo.getValue()};
-
-		},this);
+			this.Cmp.id_auxiliar.store.baseParams = {par_filtro: 'aux.codigo_auxiliar#aux.nombre_auxiliar', id_tipo_costo: this.Cmp.id_tipo_costo.getValue(), nro_cuenta: rec.data.nro_cuenta};
+		}, this);
 
 	},
 	
@@ -196,7 +205,7 @@ Phx.vista.ProrrateoCosDet=Ext.extend(Phx.gridInterfaz,{
 				triggerAction: 'all',
 				lazyRender: true,
 				mode: 'remote',
-				pageSize: 15,
+				pageSize: 50,
 				queryDelay: 1000,
 				anchor: '100%',
 				gwidth: 300,
@@ -331,7 +340,7 @@ Phx.vista.ProrrateoCosDet=Ext.extend(Phx.gridInterfaz,{
 		}
 	],
 	tam_pag:50,	
-	title:'ProrrateoCosDet',
+	title:'Prorrateo Costo Detalle',
 	ActSave:'../../sis_costos/control/ProrrateoCosDet/insertarProrrateoCosDet',
 	ActDel:'../../sis_costos/control/ProrrateoCosDet/eliminarProrrateoCosDet',
 	ActList:'../../sis_costos/control/ProrrateoCosDet/listarProrrateoCosDet',

@@ -57,7 +57,6 @@ class ACTProrrateoCosDet extends ACTbase{
 
 	function listarProrrateoCosAuxiliares(){
 
-
 		$this->objFunc=$this->create('MODProrrateoCosDet');
 		$this->res=$this->objFunc->listarProrrateoCosAuxiliares($this->objParam);
 		$this->res->imprimirRespuesta($this->res->generarJson());

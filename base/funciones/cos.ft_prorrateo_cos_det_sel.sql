@@ -233,7 +233,7 @@ BEGIN
             into
                va_id_aux
             from cos.ttipo_costo_cuenta tct
-            where tct.id_tipo_costo = v_parametros.id_tipo_costo;
+            where tct.id_tipo_costo = v_parametros.id_tipo_costo::integer and tct.codigo_cuenta = v_parametros.nro_cuenta::varchar;
 
             v_id_aux = array_to_string(va_id_aux,',');
 

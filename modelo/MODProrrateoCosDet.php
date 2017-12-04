@@ -155,6 +155,7 @@ class MODProrrateoCosDet extends MODbase{
 
 		$this->setCount(false);
 		$this->setParametro('id_tipo_costo','id_tipo_costo','int4');
+		$this->setParametro('nro_cuenta','nro_cuenta','varchar');
 
 		//Definicion de la lista del resultado del query
 		$this->captura('id_auxiliar','int4');
@@ -163,7 +164,7 @@ class MODProrrateoCosDet extends MODbase{
 
 		//Ejecuta la instruccion
 		$this->armarConsulta();
-		//var_dump($this->consulta);exit;
+		//echo($this->consulta);exit;
 		$this->ejecutarConsulta();
 
 		//Devuelve la respuesta
