@@ -37,9 +37,7 @@ class MODTipoCosto extends MODbase{
 		
 		//Ejecuta la instruccion
 		$this->armarConsulta();
-		//var_dump($this->consulta); exit;
 		$this->ejecutarConsulta();
-       // var_dump($this->respuesta); exit;
 		//Devuelve la respuesta
 		return $this->respuesta;
 	}
@@ -78,8 +76,6 @@ function listarTipoCostoArb(){
 		     //Ejecuta la instruccion
 		     $this->armarConsulta();
 			 $this->ejecutarConsulta();
-
-
 		    return $this->respuesta;       
     }
 			
@@ -184,8 +180,6 @@ function listarTipoCostoArb(){
 		     
 		//Ejecuta la instruccion
 	    $this->armarConsulta();
-		//echo $this->getConsulta();
-		//exit;
 	    $this->ejecutarConsulta();
 	    
 	    return $this->respuesta;       
@@ -228,10 +222,7 @@ function listarTipoCostoArb(){
 		
 		//Ejecuta la instruccion
 	    $this->armarConsulta();
-		echo $this->getConsulta();
-		//exit;
 	    $this->ejecutarConsulta();
-	   //var_dump($this->respuesta);exit;
 	    return $this->respuesta; 
 		
 			
