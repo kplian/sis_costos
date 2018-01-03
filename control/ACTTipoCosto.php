@@ -154,7 +154,6 @@ class ACTTipoCosto extends ACTbase{
 		
 		if($this->objParam->getParametro('tipo_reporte') == 'periodo') {
            $dataSource = $this->recuperarDatosBalanceCostos();
-           var_dump($dataSource);exit;
         }
 		else{
 			$dataSource = $this->recuperarDatosBalanceCostosCategoria();
