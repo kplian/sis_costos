@@ -303,8 +303,14 @@ Ext.extend(Phx.vista.TipoCosto,Phx.arbInterfaz,{
         {
             url: '../../../sis_costos/vista/tipo_costo_cuenta/TipoCostoCuenta.php',
             title: 'Cuentas y Auxiliares',
-            width: 400,
+            width: '50%',
             cls: 'TipoCostoCuenta'
+        },
+        {
+            url: '../../../sis_costos/vista/tipo_costo_cuenta/CheckConfig.php',
+            title: 'Cuentas/Auxiliares Pendientes de Configurar',
+            width: '50%',
+            cls: 'CheckConfig'
         }
     ],
     /*iniciarEventos:function(){

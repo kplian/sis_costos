@@ -6,19 +6,24 @@
 *@date 27-12-2016 20:53:14
 *@description Clase que recibe los parametros enviados por la vista para mandar a la capa de Modelo
 */
-
+require_once(dirname(__FILE__).'/../reportes/RBalanceCostosXls.php');
+require_once(dirname(__FILE__).'/../reportes/RBalanceCostosCatXls.php');
 class ACTTipoCosto extends ACTbase{    
 			
 	function listarTipoCosto(){
 		$this->objParam->defecto('ordenacion','id_tipo_costo_fk');
-
 		$this->objParam->defecto('dir_ordenacion','asc');
+
+		//filtro de tipo de costos de solo movimiento
+		if ($this->objParam->getParametro('sw_trans') != '') {
+			$this->objParam->addFiltro("tco.sw_trans  = ''". $this->objParam->getParametro('sw_trans')."''");
+		}
+
 		if($this->objParam->getParametro('tipoReporte')=='excel_grid' || $this->objParam->getParametro('tipoReporte')=='pdf_grid'){
 			$this->objReporte = new Reporte($this->objParam,$this);
 			$this->res = $this->objReporte->generarReporteListado('MODTipoCosto','listarTipoCosto');
 		} else{
-			$this->objFunc=$this->create('MODTipoCosto');
-			
+			$this->objFunc=$this->create('MODTipoCosto');			
 			$this->res=$this->objFunc->listarTipoCosto($this->objParam);
 		}
 		$this->res->imprimirRespuesta($this->res->generarJson());
@@ -113,6 +118,107 @@ class ACTTipoCosto extends ACTbase{
 		$this->res=$this->objFunc->eliminarTipoCosto($this->objParam);
 		$this->res->imprimirRespuesta($this->res->generarJson());
 	}
+	
+	function recuperarDatosBalanceCostos(){
+    	
+		$this->objFunc = $this->create('MODTipoCosto');
+		$cbteHeader = $this->objFunc->listarBalanceCostos($this->objParam);
+		if($cbteHeader->getTipo() == 'EXITO'){				
+			return $cbteHeader->getDatos();
+		}
+        else{
+		    $cbteHeader->imprimirRespuesta($cbteHeader->generarJson());
+			exit;
+		}              
+		
+    }
+	
+	
+	
+	function recuperarDatosBalanceCostosCategoria(){
+    	
+		$this->objFunc = $this->create('MODTipoCosto');
+		$cbteHeader = $this->objFunc->listarBalanceCostosCat($this->objParam);
+		if($cbteHeader->getTipo() == 'EXITO'){				
+			return $cbteHeader->getDatos();
+		}
+        else{
+		    $cbteHeader->imprimirRespuesta($cbteHeader->generarJson());
+			exit;
+		}              
+		
+    }
+
+   function reporteBalanceCostos()	{
+		
+		
+		if($this->objParam->getParametro('tipo_reporte') == 'periodo') {
+           $dataSource = $this->recuperarDatosBalanceCostos();
+        }
+		else{
+			$dataSource = $this->recuperarDatosBalanceCostosCategoria();
+		}
+		
+		
+		
+		//TODO recueprar configuracion ....
+		
+		$config = 'carta_horizontal';
+		$titulo = 'Árbol de Ánalisis de Costos';
+		$nombreArchivo=uniqid(md5(session_id()));
+		
+		//obtener tamaño y orientacion
+		if ($config == 'carta_vertical') {
+			$tamano = 'LETTER';
+			$orientacion = 'P';
+		} else if ($config == 'carta_horizontal') {
+			$tamano = 'LETTER';
+			$orientacion = 'L';
+		} else if ($config == 'oficio_vertical') {
+			$tamano = 'LEGAL';
+			$orientacion = 'P';
+		} else {
+			$tamano = 'LEGAL';
+			$orientacion = 'L';
+		}
+		
+		$this->objParam->addParametro('orientacion',$orientacion);
+		$this->objParam->addParametro('tamano',$tamano);		
+		$this->objParam->addParametro('titulo_archivo',$titulo);
+		$this->objParam->addParametro('test',$titulo);
+		
+		
+		
+			
+		$nombreArchivo.='.xls';
+		$this->objParam->addParametro('nombre_archivo',$nombreArchivo);
+		//$this->objParam->addParametro('config',$this->res->datos[0]);
+		$this->objParam->addParametro('datos',$dataSource);
+		
+		//Instancia la clase de excel
+		
+		if($this->objParam->getParametro('tipo_reporte') == 'periodo') {
+           $this->objReporteFormato=new RBalanceCostosXls($this->objParam);
+        }
+		else{
+			$this->objReporteFormato=new RBalanceCostosCatXls($this->objParam);
+		}
+		
+		
+		
+		$this->objReporteFormato->imprimirDatos();
+		
+		$this->objReporteFormato->generarReporte();		
+		
+		
+		//Retorna nombre del archivo
+		$this->mensajeExito=new Mensaje();
+		$this->mensajeExito->setMensaje('EXITO','Reporte.php','Reporte generado','Se generó con éxito el reporte: '.$nombreArchivo,'control');
+		$this->mensajeExito->setArchivoGenerado($nombreArchivo);
+		$this->mensajeExito->imprimirRespuesta($this->mensajeExito->generarJson());
+				
+	}
+	
 			
 }
 

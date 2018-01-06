@@ -6,7 +6,6 @@
 *@date 27-12-2016 20:53:14
 *@description Clase que envia los parametros requeridos a la Base de datos para la ejecucion de las funciones, y que recibe la respuesta del resultado de la ejecucion de las mismas
 */
-
 class MODTipoCosto extends MODbase{
 	
 	function __construct(CTParametro $pParam){
@@ -39,7 +38,6 @@ class MODTipoCosto extends MODbase{
 		//Ejecuta la instruccion
 		$this->armarConsulta();
 		$this->ejecutarConsulta();
-       // var_dump($this->respuesta); exit;
 		//Devuelve la respuesta
 		return $this->respuesta;
 	}
@@ -78,8 +76,6 @@ function listarTipoCostoArb(){
 		     //Ejecuta la instruccion
 		     $this->armarConsulta();
 			 $this->ejecutarConsulta();
-
-
 		    return $this->respuesta;       
     }
 			
@@ -145,6 +141,92 @@ function listarTipoCostoArb(){
 		//Devuelve la respuesta
 		return $this->respuesta;
 	}
+	
+	function listarBalanceCostos(){
+	    //Definicion de variables para ejecucion del procedimientp
+	    $this->procedimiento='cos.f_balance_costos';
+	    $this-> setCount(false);
+		$this->setTipoRetorno('record');
+	    $this->transaccion='COS_BALCOS_SEL';
+	    $this->tipo_procedimiento='SEL';//tipo de transaccion
+	    
+	    $this->setParametro('desde','desde','date');
+		$this->setParametro('hasta','hasta','date');
+		$this->setParametro('id_deptos','id_deptos','varchar');
+		$this->setParametro('tipo','tipo','varchar'); 
+		$this->setParametro('incluir_cierre','incluir_cierre','varchar');  
+		$this->setParametro('tipo_balance','tipo_balance','varchar'); 
+		$this->setParametro('incluir_sinmov','incluir_sinmov','varchar');
+		$this->setParametro('tipo_reporte','tipo_reporte','varchar');  
+		
+		
+		
+		
+		$this->captura('id_tipo_costo','int4'); 
+        $this->captura('id_tipo_costo_fk','int4'); 
+        $this->captura('id_cuenta','int4'); 
+        $this->captura('id_auxiliar','int4'); 
+        $this->captura('id_periodo','int4'); 
+        $this->captura('codigo','varchar'); 
+        $this->captura('nombre','varchar'); 
+        $this->captura('periodo','int4'); 
+        $this->captura('monto','numeric'); 
+        $this->captura('nivel','int4'); 
+        $this->captura('tipo','varchar'); 
+        $this->captura('nro_nodo','int4'); 
+		$this->captura('codigo_orden','varchar'); 
+		
+		
+		     
+		//Ejecuta la instruccion
+	    $this->armarConsulta();
+	    $this->ejecutarConsulta();
+	    
+	    return $this->respuesta;       
+     }
+
+    function listarBalanceCostosCat(){
+	    //Definicion de variables para ejecucion del procedimientp
+	    $this->procedimiento='cos.f_balance_costos_cat';
+	    $this-> setCount(false);
+		$this->setTipoRetorno('record');
+	    $this->transaccion='COS_BALCOSCA_SEL';
+	    $this->tipo_procedimiento='SEL';//tipo de transaccion
+	    
+	    $this->setParametro('desde','desde','date');
+		$this->setParametro('hasta','hasta','date');
+		$this->setParametro('id_deptos','id_deptos','varchar');
+		$this->setParametro('tipo','tipo','varchar'); 
+		$this->setParametro('incluir_cierre','incluir_cierre','varchar');  
+		$this->setParametro('tipo_balance','tipo_balance','varchar'); 
+		$this->setParametro('incluir_sinmov','incluir_sinmov','varchar');
+		$this->setParametro('tipo_reporte','tipo_reporte','varchar');  
+		
+		
+		
+		$this->captura('id_tipo_costo','int4'); 
+        $this->captura('id_tipo_costo_fk','int4'); 
+        $this->captura('id_cuenta','int4'); 
+        $this->captura('id_auxiliar','int4'); 
+        $this->captura('codigo','varchar'); 
+        $this->captura('nombre','varchar'); 
+        $this->captura('monto','numeric'); 
+        $this->captura('nivel','int4'); 
+        $this->captura('tipo','varchar'); 
+        $this->captura('nro_nodo','int4'); 
+		$this->captura('codigo_orden','varchar'); 
+		$this->captura('id_cp_actividad','int4'); 
+		$this->captura('desc_actividad','varchar'); 
+		$this->captura('id_categoria_programatica','int4'); 
+		$this->captura('desc_categoria','varchar'); 
+		
+		//Ejecuta la instruccion
+	    $this->armarConsulta();
+	    $this->ejecutarConsulta();
+	    return $this->respuesta; 
+		
 			
-}
+     }
+
+} 
 ?>

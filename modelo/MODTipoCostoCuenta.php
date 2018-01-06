@@ -24,6 +24,7 @@ class MODTipoCostoCuenta extends MODbase{
 		$this->captura('estado_reg','varchar');
 		$this->captura('codigo_cuenta','varchar');
 		$this->captura('id_auxiliares','varchar');
+		$this->captura('codigo_auxiliares','varchar');
 		$this->captura('auxiliares','varchar');
 		$this->captura('id_usuario_reg','int4');
 		$this->captura('fecha_reg','timestamp');
@@ -34,6 +35,7 @@ class MODTipoCostoCuenta extends MODbase{
 		$this->captura('usr_reg','varchar');
 		$this->captura('usr_mod','varchar');
 		$this->captura('id_tipo_costo','int4');
+        $this->captura('nombre_cuenta','varchar');
 		
 		
 		//Ejecuta la instruccion
@@ -129,6 +131,58 @@ class MODTipoCostoCuenta extends MODbase{
         return $this->respuesta;
 
     }
+
+     function listarConfigPendiente(){
+	    //Definicion de variables para ejecucion del procedimientp
+	    $this->procedimiento='cos.ft_tipo_costo_cuenta_sel';
+	    $this-> setCount(false);
+		//$this->setTipoRetorno('record');
+	    $this->transaccion='COS_CHKCONFIG_SEL';
+	    $this->tipo_procedimiento='SEL';//tipo de transaccion
+	    
+	    $this->setParametro('id_gestion','id_gestion','integer');
+		
+		$this->captura('id_auxiliar','int4'); 
+        $this->captura('id_cuenta','int4'); 
+        $this->captura('nro_cuenta','varchar'); 
+        $this->captura('nombre_cuenta','varchar'); 
+        $this->captura('codigo_auxiliar','varchar'); 
+        $this->captura('nombre_auxiliar','varchar'); 
+		$this->captura('rownum','varchar'); 
+		
+		
+		//Ejecuta la instruccion
+	    $this->armarConsulta();
+		//echo $this->getConsulta();
+		//exit;
+	    $this->ejecutarConsulta();
+	    
+	    return $this->respuesta; 
+		
+			
+     }
+	 function listarAuxiliarConfigurado(){
+		//Definicion de variables para ejecucion del procedimientp
+		$this->procedimiento='cos.ft_tipo_costo_cuenta_sel';
+		$this->transaccion='COS_CONFAUX_SEL';
+		$this->tipo_procedimiento='SEL';//tipo de transaccion
+		
+		$this->setParametro('id_tipo_costo_cuenta','id_tipo_costo_cuenta','integer');
+				
+		//Definicion de la lista del resultado del query
+		$this->captura('id_auxiliar','int4');
+        $this->captura('codigo_auxiliar','varchar');
+        $this->captura('nombre_auxiliar','varchar');
+        $this->captura('id_tipo_costo_cuenta','int4');
+		
+		
+		//Ejecuta la instruccion
+		$this->armarConsulta();
+		$this->ejecutarConsulta();
+		//var_dump($this->respuesta); exit;
+		//Devuelve la respuesta
+		return $this->respuesta;
+	}
 
 }
 ?>

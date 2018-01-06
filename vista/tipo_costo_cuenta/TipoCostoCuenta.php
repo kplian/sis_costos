@@ -118,6 +118,34 @@ header("content-type: text/javascript; charset=UTF-8");
                 grid: false,
                 form: true
             },
+            {
+                config: {
+                    name: 'nombre_cuenta',
+                    fieldLabel: 'Nombre Cuenta',
+                    allowBlank: true,
+                    anchor: '80%',
+                    gwidth: 600,
+                    maxLength: 10
+                },
+                type: 'TextField',
+                id_grupo: 1,
+                grid: true,
+                form: false
+            },
+            {
+                config: {
+                    name: 'codigo_auxiliares',
+                    fieldLabel: 'Codigo Auxiliares',
+                    allowBlank: true,
+                    anchor: '80%',
+                    gwidth: 600,
+                    maxLength: 10
+                },
+                type: 'TextField',
+                id_grupo: 1,
+                grid: true,
+                form: false
+            },
 
 
             {
@@ -259,6 +287,7 @@ header("content-type: text/javascript; charset=UTF-8");
         fields: [
             {name: 'id_tipo_costo_cuenta', type: 'numeric'},
             {name: 'id_tipo_costo', type: 'numeric'},
+            {name: 'codigo_auxiliares', type: 'string'},
             {name: 'auxiliares', type: 'string'},
             {name: 'estado_reg', type: 'string'},
             {name: 'codigo_cuenta', type: 'string'},
@@ -270,7 +299,8 @@ header("content-type: text/javascript; charset=UTF-8");
             {name: 'id_usuario_mod', type: 'numeric'},
             {name: 'fecha_mod', type: 'date', dateFormat: 'Y-m-d H:i:s.u'},
             {name: 'usr_reg', type: 'string'},
-            {name: 'usr_mod', type: 'string'}
+            {name: 'usr_mod', type: 'string'},
+            {name: 'nombre_cuenta', type: 'string'}
 
 
         ],
@@ -305,8 +335,14 @@ header("content-type: text/javascript; charset=UTF-8");
             this.Cmp.id_tipo_costo.setValue(this.id_tipo_costo);
             Phx.vista.TipoCostoCuenta.superclass.loadValoresIniciales.call(this);
         },
-
-
+        
+        south : {
+			url : '../../../sis_costos/vista/tipo_costo_cuenta/AuxiliarConf.php',
+			title : 'Auxiliares',
+			height : '50%', //altura de la ventana hijo
+			cls : 'AuxiliarConf'
+		},
+		
         bdel: true,
         bsave: true
     })
